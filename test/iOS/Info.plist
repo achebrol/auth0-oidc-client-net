@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>iOS OIDC Test</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.auth0.iOSTestApp</string>
+	<string>com.Ping.iOSTestApp</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -44,10 +44,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>auth0</string>
+			<string>Ping</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.auth0.iOSTestApp</string>
+				<string>com.Ping.iOSTestApp</string>
 			</array>
 		</dict>
 	</array>

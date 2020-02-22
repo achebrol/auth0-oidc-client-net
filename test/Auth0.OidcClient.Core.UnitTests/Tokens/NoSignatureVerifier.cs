@@ -1,9 +1,9 @@
-﻿using Auth0.OidcClient.Tokens;
+﻿using Ping.OidcClient.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 
-namespace Auth0.OidcClient.Core.UnitTests.Tokens
+namespace Ping.OidcClient.Core.UnitTests.Tokens
 {
     internal class NoSignatureVerifier : ISignatureVerifier
     {

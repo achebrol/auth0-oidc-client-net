@@ -1,4 +1,4 @@
-﻿using Auth0.OidcClient;
+﻿using Ping.OidcClient;
 using System;
 using UIKit;
 
@@ -6,7 +6,7 @@ namespace iOSTestApp
 {
     public partial class MyViewController : UIViewController
     {
-        private Auth0Client _auth0Client;
+        private PingClient _PingClient;
         private Action<string> writeLine;
         private Action clearText;
         private string accessToken;
@@ -19,9 +19,9 @@ namespace iOSTestApp
         {
             base.ViewDidLoad();
 
-            _auth0Client = new Auth0Client(new Auth0ClientOptions
+            _PingClient = new PingClient(new PingClientOptions
             {
-                Domain = "auth0-dotnet-integration-tests.auth0.com",
+                Domain = "Ping-dotnet-integration-tests.Ping.com",
                 ClientId = "qmss9A66stPWTOXjR6X1OeA0DLadoNP2"
             });
 
@@ -38,7 +38,7 @@ namespace iOSTestApp
             clearText();
             writeLine("Starting login...");
 
-            var loginResult = await _auth0Client.LoginAsync();
+            var loginResult = await _PingClient.LoginAsync();
 
             if (loginResult.IsError)
             {
@@ -66,7 +66,7 @@ namespace iOSTestApp
             clearText();
             writeLine("Starting logout...");
 
-            var result = await _auth0Client.LogoutAsync();
+            var result = await _PingClient.LogoutAsync();
             accessToken = null;
             writeLine(result.ToString());
         }
@@ -82,7 +82,7 @@ namespace iOSTestApp
             }
 
             writeLine("Getting user info...");
-            var userInfoResult = await _auth0Client.GetUserInfoAsync(accessToken);
+            var userInfoResult = await _PingClient.GetUserInfoAsync(accessToken);
 
             if (userInfoResult.IsError)
             {

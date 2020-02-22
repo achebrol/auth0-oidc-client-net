@@ -1,4 +1,4 @@
-﻿using Auth0.OidcClient;
+﻿using Ping.OidcClient;
 using Foundation;
 using UIKit;
 

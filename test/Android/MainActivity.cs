@@ -3,7 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Text.Method;
 using Android.Widget;
-using Auth0.OidcClient;
+using Ping.OidcClient;
 using System;
 
 namespace AndroidTestApp
@@ -13,11 +13,11 @@ namespace AndroidTestApp
         new[] { Intent.ActionView },
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
         DataScheme = "androidtestapp.androidtestapp",
-        DataHost = "@string/auth0_domain",
+        DataHost = "@string/Ping_domain",
         DataPathPrefix = "/android/AndroidTestApp.AndroidTestApp/callback")]
-    public class MainActivity : Auth0ClientActivity
+    public class MainActivity : PingClientActivity
     {
-        private Auth0Client _auth0Client;
+        private PingClient _PingClient;
         private Action<string> writeLine;
         private Action clearText;
         private TextView _userDetailsTextView;
@@ -27,9 +27,9 @@ namespace AndroidTestApp
         {
             base.OnCreate(bundle);
 
-            _auth0Client = new Auth0Client(new Auth0ClientOptions
+            _PingClient = new PingClient(new PingClientOptions
             {
-                Domain = Resources.GetString(Resource.String.auth0_domain),
+                Domain = Resources.GetString(Resource.String.Ping_domain),
                 ClientId = "qmss9A66stPWTOXjR6X1OeA0DLadoNP2"
             }, this);
 
@@ -50,7 +50,7 @@ namespace AndroidTestApp
             clearText();
             writeLine("Starting login...");
 
-            var loginResult = await _auth0Client.LoginAsync();
+            var loginResult = await _PingClient.LoginAsync();
 
             if (loginResult.IsError)
             {
@@ -78,7 +78,7 @@ namespace AndroidTestApp
             clearText();
             writeLine("Starting logout...");
 
-            var result = await _auth0Client.LogoutAsync();
+            var result = await _PingClient.LogoutAsync();
             accessToken = null;
             writeLine(result.ToString());
         }
@@ -94,7 +94,7 @@ namespace AndroidTestApp
             }
 
             writeLine("Getting user info...");
-            var userInfoResult = await _auth0Client.GetUserInfoAsync(accessToken);
+            var userInfoResult = await _PingClient.GetUserInfoAsync(accessToken);
 
             if (userInfoResult.IsError)
             {
