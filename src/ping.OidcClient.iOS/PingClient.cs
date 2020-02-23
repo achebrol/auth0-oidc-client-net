@@ -1,4 +1,5 @@
-﻿using static Foundation.NSBundle;
+﻿using System.Threading.Tasks;
+using static Foundation.NSBundle;
 
 namespace Ping.OidcClient
 {
@@ -8,16 +9,12 @@ namespace Ping.OidcClient
     /// </summary>
     public class PingClient : PingClientBase
     {
-        /// <summary>
-        /// Creates a new instance of the Ping OIDC Client.
-        /// </summary>
-        /// <param name="options">The <see cref="PingClientOptions"/> specifying the configuration for the Ping OIDC Client.</param>
-        public PingClient(PingClientOptions options)
-            : base(options, "xamarin-ios")
+
+
+        public override void InitializeAsync(PingClientOptions options)
         {
             options.Browser = options.Browser ?? new AutoSelectBrowser();
-            options.RedirectUri = options.RedirectUri;
-            options.PostLogoutRedirectUri = options.PostLogoutRedirectUri;
+            base.InitializeAsync(options);
         }
     }
 }

@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Demo</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.Demo</string>
+	<string>com.aa.xamarinpoc</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>

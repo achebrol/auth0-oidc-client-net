@@ -9,7 +9,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(MainPage), typeof(Demo.iOS.LoginPageRenderer))]
+//[assembly: ExportRenderer(typeof(MainPage), typeof(Demo.iOS.LoginPageRenderer))]
 namespace Demo.iOS
 {
     public class LoginPageRenderer : PageRenderer
@@ -21,5 +21,4 @@ namespace Demo.iOS
 
         }
     }
-}
 }

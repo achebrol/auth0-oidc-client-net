@@ -13,7 +13,7 @@ using Demo;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(MainPage), typeof(Demo.Droid.LoginPageRenderer))]
+//[assembly: ExportRenderer(typeof(MainPage), typeof(Demo.Droid.LoginPageRenderer))]
 namespace Demo.Droid
 {
     public class LoginPageRenderer : PageRenderer

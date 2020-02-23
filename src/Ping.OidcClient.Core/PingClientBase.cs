@@ -21,9 +21,8 @@ namespace Ping.OidcClient
     /// </summary>
     public abstract class PingClientBase : IPingClient
     {
-        private readonly IdTokenRequirements _idTokenRequirements;
-        private readonly PingClientOptions _options;
-        private readonly string _userAgent;
+        private IdTokenRequirements _idTokenRequirements;
+        private PingClientOptions _options;
         private IdentityModel.OidcClient.OidcClient _oidcClient;
         private IdentityModel.OidcClient.OidcClient OidcClient
         {
@@ -33,17 +32,7 @@ namespace Ping.OidcClient
             }
         }
 
-        /// <summary>
-        /// Create a new instance of <see cref="PingClientBase"/>.
-        /// </summary>
-        /// <param name="options"><see cref="PingClientOptions"/> specifying the configuration options for this client.</param>
-        /// <param name="platformName">Platform name that forms part of the user-agent when communicating with Ping servers.</param>
-        protected PingClientBase(PingClientOptions options, string platformName)
-        {
-            _options = options;
-            _idTokenRequirements = new IdTokenRequirements($"https://{_options.Authority}/", _options.ClientId, options.Leeway, options.MaxAge);
-            _userAgent = CreateAgentString(platformName);
-        }
+
 
         /// <inheritdoc />
         public async Task<LoginResult> LoginAsync(object extraParameters = null, CancellationToken cancellationToken = default)
@@ -185,5 +174,12 @@ namespace Ping.OidcClient
 
             return dictionary;
         }
+
+        public virtual void InitializeAsync(PingClientOptions options)
+        {
+            _options = options;
+            _idTokenRequirements = new IdTokenRequirements($"https://{_options.Authority}/", _options.ClientId, options.Leeway, options.MaxAge);
+        }
+
     }
 }

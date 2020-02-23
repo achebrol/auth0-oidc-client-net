@@ -13,6 +13,7 @@ namespace Ping.OidcClient
     /// </summary>
     public interface IPingClient
     {
+        void InitializeAsync(PingClientOptions options);
         /// <summary>
         /// Launches a browser to log the user in.
         /// </summary>

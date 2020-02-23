@@ -19,7 +19,7 @@ namespace Demo
         {
             InitializeComponent();
             _pingClient = DependencyService.Get<IPingClient>();
-            _pingClient = new PingClient(new PingClientOptions
+            _pingClient.InitializeAsync(new PingClientOptions
             {
                 Authority = "idptest.aa.com",
                 ClientId = "LM-MYTASKS-APP",
