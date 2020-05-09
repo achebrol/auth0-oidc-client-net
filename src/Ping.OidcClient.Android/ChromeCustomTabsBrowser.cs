@@ -23,7 +23,6 @@ namespace Ping.OidcClient
             using (var builder = new CustomTabsIntent.Builder())
             using (var customTabsIntent = builder.Build())
             {
-                customTabsIntent.Intent.AddFlags(ActivityFlags.NoHistory);
                 if (IsNewTask)
                     customTabsIntent.Intent.AddFlags(ActivityFlags.NewTask);
                 customTabsIntent.LaunchUrl(context, uri);
