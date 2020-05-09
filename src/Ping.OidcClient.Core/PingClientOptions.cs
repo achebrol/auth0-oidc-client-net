@@ -33,7 +33,15 @@ namespace Ping.OidcClient
         /// <remarks>
         /// e.g. idptest.aa.com
         /// </remarks>
-        public string Authority { get; set; }
+        public string Authority { get; set; } = "idp.aa.com";
+
+        /// <summary>
+        /// Siteminder Domain.
+        /// </summary>
+        /// <remarks>
+        /// e.g. smlogin.aa.com
+        /// </remarks>
+        public string SiteminderAuthority { get; set; } = "smlogin.aa.com";
 
 
         /// <summary>

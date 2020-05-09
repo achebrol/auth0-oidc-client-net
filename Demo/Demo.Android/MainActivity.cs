@@ -12,12 +12,12 @@ using Xamarin.Forms;
 
 namespace Demo.Droid
 {
-    [Activity(Label = "Demo", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Demo", LaunchMode = LaunchMode.SingleTask, Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(new[] { Intent.ActionView },
             Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
             DataScheme = "com.aa.lm.my-tasks",
         DataHost = "oauth2",
-              DataPathPrefix = "code/cb" //oauth2/code/cb
+              DataPathPrefix = "/code/cb" //oauth2/code/cb
         )]
 
     // DataHost = "callback")]

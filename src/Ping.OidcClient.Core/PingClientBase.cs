@@ -12,6 +12,8 @@ using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using IdentityModel.OidcClient.Results;
 using static IdentityModel.OidcClient.OidcClientOptions;
+using System.Net.Http;
+using Microsoft.IdentityModel.Logging;
 
 namespace Ping.OidcClient
 {
@@ -28,11 +30,40 @@ namespace Ping.OidcClient
         {
             get
             {
-                return _oidcClient ?? (_oidcClient = new IdentityModel.OidcClient.OidcClient(CreateOidcClientOptions(_options)));
+                return _oidcClient ?? (_oidcClient = createClient());
             }
         }
 
+        private IdentityModel.OidcClient.OidcClient createClient()
+        {
+            var oidcOptions = CreateOidcClientOptions(_options);
 
+            var discoveryClient = new HttpClient();
+            var disco = (discoveryClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest()
+            {
+                Address = $"https://{_options.Authority}/.well-known/openid-configuration"
+            })).Result;
+            var keySet = new IdentityModel.Jwk.JsonWebKeySet();
+            //Exclude ECDsa keys as its not supported in .net mono/xamarin
+            disco.KeySet.Keys.Where(k => !string.IsNullOrEmpty(k.E) && !string.IsNullOrEmpty(k.N)).ToList().ForEach(k => keySet.Keys.Add(k));
+            IdentityModelEventSource.ShowPII = true;
+
+            oidcOptions.LoadProfile = false;
+
+            oidcOptions.ProviderInformation = new ProviderInformation()
+            {
+                AuthorizeEndpoint = disco.AuthorizeEndpoint,
+                EndSessionEndpoint = $"https://{_options.SiteminderAuthority}/login/SMLogout.jsp",
+                IssuerName = disco.Issuer,
+                TokenEndpoint = disco.TokenEndpoint,
+
+                KeySet = keySet,
+                TokenEndPointAuthenticationMethods = disco.TokenEndpointAuthenticationMethodsSupported,
+            };
+
+
+            return new IdentityModel.OidcClient.OidcClient(oidcOptions);
+        }
 
         /// <inheritdoc />
         public async Task<LoginResult> LoginAsync(object extraParameters = null, CancellationToken cancellationToken = default)

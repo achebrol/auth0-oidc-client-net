@@ -81,6 +81,12 @@
       <Version>3.1.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Ping.OidcClient.Android\Ping.OidcClient.Android.csproj">
+      <Project>{A18A146B-FB5A-4AB8-8F1C-501E58AA7D4D}</Project>
+      <Name>Ping.OidcClient.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.

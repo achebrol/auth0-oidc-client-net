@@ -22,9 +22,11 @@ namespace Demo
             _pingClient.InitializeAsync(new PingClientOptions
             {
                 Authority = "idptest.aa.com",
+                SiteminderAuthority = "smlogin.qcorpaa.aa.com",
                 ClientId = "LM-MYTASKS-APP",
                 Scope = "openid profile offline_access",
                 RedirectUri = "com.aa.lm.my-tasks://oauth2/code/cb",
+
             });
 
             LoginButton.Clicked += LoginButton_Clicked;
