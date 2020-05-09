@@ -11,8 +11,11 @@
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
-        <Button Text="Login" x:Name="LoginButton" />
         <Label x:Name="ResultLabel" LineBreakMode="WordWrap" />
+        
+        <Button Text="Login" x:Name="LoginButton" />
+        <Button Text="Logout" x:Name="LogoutButton" />
+
     </StackLayout>
 
 </ContentPage>

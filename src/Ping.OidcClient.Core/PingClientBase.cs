@@ -14,6 +14,7 @@ using IdentityModel.OidcClient.Results;
 using static IdentityModel.OidcClient.OidcClientOptions;
 using System.Net.Http;
 using Microsoft.IdentityModel.Logging;
+using System.Net;
 
 namespace Ping.OidcClient
 {
@@ -49,7 +50,7 @@ namespace Ping.OidcClient
             IdentityModelEventSource.ShowPII = true;
 
             oidcOptions.LoadProfile = false;
-
+            oidcOptions.PostLogoutRedirectUri = oidcOptions.RedirectUri;
             oidcOptions.ProviderInformation = new ProviderInformation()
             {
                 AuthorizeEndpoint = disco.AuthorizeEndpoint,
@@ -90,13 +91,13 @@ namespace Ping.OidcClient
             Debug.WriteLine($"Using Callback URL '{OidcClient.Options.PostLogoutRedirectUri}'. Ensure this is an Allowed Logout URL for application/client ID {_options.ClientId}.");
 
             var logoutParameters = AppendTelemetry(extraParameters);
-            logoutParameters["client_id"] = OidcClient.Options.ClientId;
-            logoutParameters["returnTo"] = OidcClient.Options.PostLogoutRedirectUri;
+            //logoutParameters["client_id"] = OidcClient.Options.ClientId;
+            logoutParameters["redirectTo"] = OidcClient.Options.PostLogoutRedirectUri;
 
             var endSessionUrl = new RequestUrl($"https://{_options.Authority}/idp/startSLO.ping").Create(logoutParameters);
-
+            var siteminderLogoutUrl = $"https://smlogin.qtcorpaa.aa.com/login/SMLogout.jsp?originalTarget={WebUtility.UrlEncode(endSessionUrl)}";
             var logoutRequest = new LogoutRequest();
-            var browserOptions = new BrowserOptions(endSessionUrl, OidcClient.Options.PostLogoutRedirectUri ?? string.Empty)
+            var browserOptions = new BrowserOptions(siteminderLogoutUrl, OidcClient.Options.PostLogoutRedirectUri ?? string.Empty)
             {
                 Timeout = TimeSpan.FromSeconds(logoutRequest.BrowserTimeout),
                 DisplayMode = logoutRequest.BrowserDisplayMode
@@ -209,7 +210,7 @@ namespace Ping.OidcClient
         public virtual void InitializeAsync(PingClientOptions options)
         {
             _options = options;
-            _idTokenRequirements = new IdTokenRequirements($"https://{_options.Authority}/", _options.ClientId, options.Leeway, options.MaxAge);
+            _idTokenRequirements = new IdTokenRequirements($"https://{_options.Authority}", _options.ClientId, options.Leeway, options.MaxAge);
         }
 
     }

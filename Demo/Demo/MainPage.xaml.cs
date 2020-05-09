@@ -30,11 +30,17 @@ namespace Demo
             });
 
             LoginButton.Clicked += LoginButton_Clicked;
+            LogoutButton.Clicked += LogoutButton_Clicked;
+        }
+
+        private async void LogoutButton_Clicked(object sender, EventArgs e)
+        {
+            var logoutResult = await _pingClient.LogoutAsync();
         }
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            var authState = await _pingClient.PrepareLoginAsync();
+            //var authState = await _pingClient.PrepareLoginAsync();
 
             var loginResult = await _pingClient.LoginAsync();
 
@@ -49,7 +55,7 @@ namespace Demo
             }
             else
             {
-                ResultLabel.Text = $"Welcome {loginResult.User.Identity.Name}";
+                ResultLabel.Text = $"Welcome {loginResult.User.FindFirst("sub").Value}";
 
                 sb.AppendLine($"ID Token: {loginResult.IdentityToken}");
                 sb.AppendLine($"Access Token: {loginResult.AccessToken}");
