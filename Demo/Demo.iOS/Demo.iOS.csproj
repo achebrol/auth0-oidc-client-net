@@ -132,6 +132,8 @@
     <ProjectReference Include="..\..\src\ping.OidcClient.iOS\Ping.OidcClient.iOS.csproj">
       <Project>{d6cd228a-d8fa-4250-b770-ccc9ccd5698b}</Project>
       <Name>Ping.OidcClient.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Demo\Demo.csproj">
       <Project>{58125314-43C5-4547-BB95-AEDC0639E4E5}</Project>

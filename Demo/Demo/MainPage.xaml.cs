@@ -32,6 +32,8 @@ namespace Demo
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
+            var authState = await _pingClient.PrepareLoginAsync();
+
             var loginResult = await _pingClient.LoginAsync();
 
             var sb = new StringBuilder();

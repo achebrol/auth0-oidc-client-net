@@ -15,8 +15,9 @@ namespace Demo.Droid
     [Activity(Label = "Demo", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(new[] { Intent.ActionView },
             Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
-            DataScheme = "com.aa.lm.my-tasks"
-        // ,DataPathPrefix = "oauth2/code/cb"
+            DataScheme = "com.aa.lm.my-tasks",
+        DataHost = "oauth2",
+              DataPathPrefix = "code/cb" //oauth2/code/cb
         )]
 
     // DataHost = "callback")]
