@@ -92,11 +92,13 @@ namespace Ping.OidcClient
 
             var logoutParameters = AppendTelemetry(extraParameters);
             //logoutParameters["client_id"] = OidcClient.Options.ClientId;
-            logoutParameters["redirectTo"] = OidcClient.Options.PostLogoutRedirectUri;
+            logoutParameters["post_logout_redirect_uri"] = OidcClient.Options.PostLogoutRedirectUri;
 
             var endSessionUrl = new RequestUrl($"https://{_options.Authority}/idp/startSLO.ping").Create(logoutParameters);
+            //Logout Flow:Siteminder==>Ping Federate==> App
             var siteminderLogoutUrl = $"https://smlogin.qtcorpaa.aa.com/login/SMLogout.jsp?originalTarget={WebUtility.UrlEncode(endSessionUrl)}";
             var logoutRequest = new LogoutRequest();
+            
             var browserOptions = new BrowserOptions(siteminderLogoutUrl, OidcClient.Options.PostLogoutRedirectUri ?? string.Empty)
             {
                 Timeout = TimeSpan.FromSeconds(logoutRequest.BrowserTimeout),

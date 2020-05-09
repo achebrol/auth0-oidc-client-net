@@ -136,7 +136,7 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Demo\Demo.csproj">
-      <Project>{58125314-43C5-4547-BB95-AEDC0639E4E5}</Project>
+      <Project>{33600A57-E2B4-4CC1-9D5B-5C7017EE4CE6}</Project>
       <Name>Demo</Name>
     </ProjectReference>
   </ItemGroup>

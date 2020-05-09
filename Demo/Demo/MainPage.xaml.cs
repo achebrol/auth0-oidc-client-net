@@ -55,7 +55,7 @@ namespace Demo
             }
             else
             {
-                ResultLabel.Text = $"Welcome {loginResult.User.FindFirst("sub").Value}";
+                
 
                 sb.AppendLine($"ID Token: {loginResult.IdentityToken}");
                 sb.AppendLine($"Access Token: {loginResult.AccessToken}");
@@ -66,6 +66,7 @@ namespace Demo
                 {
                     sb.AppendLine($"{claim.Type} = {claim.Value}");
                 }
+                ResultLabel.Text = sb.ToString();
             }
 
             System.Diagnostics.Debug.WriteLine(sb.ToString());
