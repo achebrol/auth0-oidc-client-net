@@ -92,7 +92,9 @@ namespace Ping.OidcClient
 
             var logoutParameters = AppendTelemetry(extraParameters);
             //logoutParameters["client_id"] = OidcClient.Options.ClientId;
-            logoutParameters["post_logout_redirect_uri"] = OidcClient.Options.PostLogoutRedirectUri;
+            //logoutParameters["post_logout_redirect_uri"] = OidcClient.Options.PostLogoutRedirectUri;
+            logoutParameters["TargetResource"] = OidcClient.Options.PostLogoutRedirectUri;
+
 
             var endSessionUrl = new RequestUrl($"https://{_options.Authority}/idp/startSLO.ping").Create(logoutParameters);
             //Logout Flow:Siteminder==>Ping Federate==> App
