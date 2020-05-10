@@ -14,16 +14,8 @@ namespace Ping.OidcClient.Tokens
         {
             var metadataAddress = new UriBuilder(issuer) { Path = "/.well-known/openid-configuration" }.Uri.OriginalString;
             var openIdConfiguration = await GetOpenIdConfiguration(metadataAddress);
-
-            var keySet = new JsonWebKeySet();
-            //Exclude ECDsa keys as its not supported in .net mono/xamarin
-            openIdConfiguration.JsonWebKeySet.Keys
-                                .Where(k => !string.IsNullOrEmpty(k.E) &&
-                                            !string.IsNullOrEmpty(k.N))
-                                .ToList()
-                                .ForEach(k => keySet.Keys.Add(k));
-            IdentityModelEventSource.ShowPII = true;
-
+            //IdentityModelEventSource.ShowPII = true;
+            var keySet = openIdConfiguration.JsonWebKeySet.ExcludeECDSA();
             return keySet;
         }
 

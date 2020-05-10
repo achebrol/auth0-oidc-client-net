@@ -44,9 +44,7 @@ namespace Ping.OidcClient
             {
                 Address = $"https://{_options.Authority}/.well-known/openid-configuration"
             })).Result;
-            var keySet = new IdentityModel.Jwk.JsonWebKeySet();
-            //Exclude ECDsa keys as its not supported in .net mono/xamarin
-            disco.KeySet.Keys.Where(k => !string.IsNullOrEmpty(k.E) && !string.IsNullOrEmpty(k.N)).ToList().ForEach(k => keySet.Keys.Add(k));
+            var keySet = disco.KeySet.ExcludeECDSA();
             IdentityModelEventSource.ShowPII = true;
 
             oidcOptions.LoadProfile = false;
